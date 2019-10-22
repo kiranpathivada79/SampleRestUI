@@ -1,0 +1,133 @@
+<div class="container">
+
+  <mat-card>
+    <mat-toolbar color="accent">
+      <div align="center" style="color:white;text-align: right;">
+      Technical Exercise on Contact  - Anular 7, API & SQL
+      </div>
+     
+    </mat-toolbar>
+  <br><br>
+    <mat-card-content>
+      <form [formGroup]="contactForm" (ngSubmit)="onFormSubmit(contactForm.value)">
+  
+              <table>
+                <tr>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="FirstName" matTooltip="Enter First Name" matInput placeholder="First Name">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!contactForm.get('FirstName').value && contactForm.get('FirstName').touched"></span>
+                    </mat-error>
+                  </td>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="LastName" matTooltip="Enter Last Name" matInput placeholder="Last Name">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!contactForm.get('LastName').value && contactForm.get('LastName').touched"></span>
+                    </mat-error>
+                  </td>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="MiddleName" matTooltip="Enter Middle Name" matInput placeholder="Middle Name">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!contactForm.get('MiddleName').value && contactForm.get('MiddleName').touched"></span>
+                    </mat-error>
+                  </td>
+                  
+                </tr>
+                <tr>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="Zip" matTooltip="Enter Zip " matInput placeholder="Zip">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!contactForm.get('Zip').value && contactForm.get('Zip').touched"></span>
+                    </mat-error>
+                  </td>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="State" matTooltip="Enter State Name" matInput placeholder="State">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!contactForm.get('State').value && contactForm.get('State').touched"></span>
+                    </mat-error>
+                  </td>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="City" matTooltip="Enter City" matInput placeholder="City">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!contactForm.get('City').value && contactForm.get('City').touched"></span>
+                    </mat-error>
+                  </td>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="Street" matTooltip="Enter Street" matInput placeholder="Street">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!contactForm.get('Street').value && contactForm.get('Street').touched"></span>
+                    </mat-error>
+                  </td>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input matInput [matDatepicker]="picker" matTooltip="Enter Created Date" formControlName="CratedDate" placeholder="Choose Created Date">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!contactForm.get('CratedDate').value && contactForm.get('CratedDate').touched"></span>
+                    </mat-error>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td  class="content-center">
+                    <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button" [disabled]="!contactForm.valid">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>
+                  </td>
+                  <td>
+                    <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">
+                      {{massage}}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+  <br><br>
+        <table class="table" >
+            <tr ngclass="btn-primary">
+              <th class="tbl2">First Name</th>
+              <th class="tbl2">Last Name</th>
+              <th class="tbl2">Middle Name</th>
+              <th class="tbl2">Zip</th>
+              <th class="tbl2">Street</th>
+              <th class="tbl2">State</th>
+              <th class="tbl2">Edit</th>
+              <th class="tbl2">Delete</th>
+            </tr>
+            <tr *ngFor="let contact of allContact | async">
+              <td class="tbl2">{{contact.FirstName}}</td>
+              <td class="tbl2">{{contact.LastName}}</td>
+              <td class="tbl2">{{contact.MiddleName}}</td>
+              <td class="tbl2">{{contact.Zip }}</td>
+              <td class="tbl2">{{contact.Street}}</td>
+              <td class="tbl2">{{contact.State}}</td>
+              <td class="tbl2">
+                <button type="button" class="btn btn-info" matTooltip="Click Edit Button" (click)="loadEmployeeToEdit(contact.ContactId)">Edit</button>
+              </td>
+              <td class="tbl2">
+                <button type="button" class="btn btn-danger" matTooltip="Click Delete Button" (click)="deleteEmployee(contact.ContactId)">Delete</button>
+              </td>
+              
+            </tr>
+  
+          </table>
+  
+      </form>
+    </mat-card-content>
+  </mat-card>
+  
+  </div>
